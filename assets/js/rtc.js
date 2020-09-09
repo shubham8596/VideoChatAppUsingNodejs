@@ -4,6 +4,7 @@ import h from './helpers.js';
 window.addEventListener( 'load', () => {
     const room = h.getQString( location.href, 'room' );
     const username = sessionStorage.getItem( 'username' );
+    
 
     if ( !room ) {
         document.querySelector( '#room-create' ).attributes.removeNamedItem( 'hidden' );
@@ -12,7 +13,7 @@ window.addEventListener( 'load', () => {
     else if ( !username ) {
         document.querySelector( '#username-set' ).attributes.removeNamedItem( 'hidden' );
     }
-
+   
     else {
         let commElem = document.getElementsByClassName( 'room-comm' );
 
@@ -109,6 +110,7 @@ window.addEventListener( 'load', () => {
         }
 
 
+
         function init( createOffer, partnerName ) {
             pc[partnerName] = new RTCPeerConnection( h.getIceServer() );
 
@@ -139,6 +141,8 @@ window.addEventListener( 'load', () => {
                 } );
             }
 
+
+
             //create offer
             if ( createOffer ) {
                 pc[partnerName].onnegotiationneeded = async () => {
@@ -150,10 +154,14 @@ window.addEventListener( 'load', () => {
                 };
             }
 
+
+
             //send ice candidate to partnerNames
             pc[partnerName].onicecandidate = ( { candidate } ) => {
                 socket.emit( 'ice candidates', { candidate: candidate, to: partnerName, sender: socketId } );
             };
+
+
 
             //add
             pc[partnerName].ontrack = ( e ) => {
@@ -191,6 +199,22 @@ window.addEventListener( 'load', () => {
             };
 
 
+
+            pc[partnerName].onconnectionstatechange = ( d ) => {
+                switch ( pc[partnerName].iceConnectionState ) {
+                    case 'disconnected':
+                    case 'failed':
+                        h.closeVideo( partnerName );
+                        break;
+
+                    case 'closed':
+                        h.closeVideo( partnerName );
+                        break;
+                }
+            };
+
+
+
             pc[partnerName].onsignalingstatechange = ( d ) => {
                 switch ( pc[partnerName].signalingState ) {
                     case 'closed':
@@ -200,6 +224,23 @@ window.addEventListener( 'load', () => {
                 }
             };
         }
+
+
+        function broadcastNewTracks( stream, type, mirrorMode = true ) {
+            h.setLocalStream( stream, mirrorMode );
+
+            let track = type == 'audio' ? stream.getAudioTracks()[0] : stream.getVideoTracks()[0];
+
+            for ( let p in pc ) {
+                let pName = pc[p];
+
+                if ( typeof pc[pName] == 'object' ) {
+                    h.replaceTrack( track, pc[pName] );
+                }
+            }
+        }
+
+
 
 
         //When the video icon is clicked
@@ -253,6 +294,6 @@ window.addEventListener( 'load', () => {
             broadcastNewTracks( myStream, 'audio' );
         } );
 
+       
     }
 } );
-

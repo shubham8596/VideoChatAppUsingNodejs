@@ -1,8 +1,29 @@
 import helpers from './helpers.js';
 
 window.addEventListener( 'load', () => {
-   
-    //When the 'Create room" is button is clicked
+    
+/*
+    //When the video frame is clicked. This will enable picture-in-picture
+    document.getElementById( 'local' ).addEventListener( 'click', () => {
+        if ( !document.pictureInPictureElement ) {
+            document.getElementById( 'local' ).requestPictureInPicture()
+                .catch( error => {
+                    // Video failed to enter Picture-in-Picture mode.
+                    console.error( error );
+                } );
+        }
+
+        else {
+            document.exitPictureInPicture()
+                .catch( error => {
+                    // Video failed to leave Picture-in-Picture mode.
+                    console.error( error );
+                } );
+        }
+    } );
+*/
+
+    //When the "Create room" button is clicked
     document.getElementById( 'create-room' ).addEventListener( 'click', ( e ) => {
         e.preventDefault();
 
@@ -20,7 +41,7 @@ window.addEventListener( 'load', () => {
             let roomLink = `${ location.origin }?room=${ roomName.trim().replace( ' ', '_' ) }_${ helpers.generateRandomString() }`;
 
             //show message with link to room
-            document.querySelector( '#room-created' ).innerHTML = `Room created successfully. Click <a href='${ roomLink }'>here</a> to enter room. 
+            document.querySelector( '#room-created' ).innerHTML = `Room successfully created. Click <a href='${ roomLink }'>here</a> to enter room. 
                 Share the room link with your partners.`;
 
             //empty the values
@@ -31,9 +52,43 @@ window.addEventListener( 'load', () => {
         else {
             document.querySelector( '#err-msg' ).innerHTML = "All fields are required";
         }
+	
     } );
 
-	//When the 'Enter room' button is clicked.
+    //When the 'New Here" is button is clicked
+    document.getElementById( 'new-here' ).addEventListener( 'click', ( e ) => {
+        e.preventDefault();
+
+	let roomLink = `signup`;
+	//show message with link to room
+	document.querySelector( '#signup-here' ).innerHTML = `<a href='${ roomLink }'>sign up</a>` ;
+	//empty the values
+	
+	document.getElementById( 'sign-up' ).addEventListener( 'click', ( e ) => {
+        e.preventDefault();
+
+		 let firstName = document.querySelector( '#first-name' ).value;
+        	 let lastName = document.querySelector( '#last-name' ).value;
+		 let email = document.querySelector( '#email' ).value;
+		 if(firstName && lastName && email)
+	         {
+			 document.querySelector( '#err-msg1' ).innerHTML = "";
+ 			 document.querySelector( '#first-name' ).value = '';
+            		 document.querySelector( '#last-name' ).value = '';
+			  document.querySelector( '#email' ).value = '';
+		 }
+		 else {
+            		document.querySelector( '#err-msg1' ).innerHTML = "All fields are required";
+        	}
+		
+	         
+		
+     } );	   
+
+    } );
+
+
+    //When the 'Enter room' button is clicked.
     document.getElementById( 'enter-room' ).addEventListener( 'click', ( e ) => {
         e.preventDefault();
 
@@ -56,6 +111,9 @@ window.addEventListener( 'load', () => {
     } );
 
 
+        
+
+
     document.addEventListener( 'click', ( e ) => {
         if ( e.target && e.target.classList.contains( 'expand-remote-video' ) ) {
             helpers.maximiseStream( e );
@@ -66,7 +124,8 @@ window.addEventListener( 'load', () => {
         }
     } );
 
-
-   
+/*
+    document.getElementById( 'closeModal' ).addEventListener( 'click', () => {
+        helpers.toggleModal( 'recording-options-modal', false );
+    } ); */
 } );
-
