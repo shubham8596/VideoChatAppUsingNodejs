@@ -1,0 +1,36 @@
+<html>
+<body>
+    <form action="/" method="POST">
+    <br><br>
+    <div class="row">
+        <div class="col-12 h2 mt-5 text-center">Create Room</div>
+    </div>
+    
+    <div class="row mt-2">
+        <div class="col-12 text-center">
+            <span class="form-text medium text-danger" id='err-msg'></span>
+        </div>
+    <br>
+        <div class="col-12 col-md-4 offset-md-4 mb-3">
+            <input type="text" id='roomid' name='roomid' class="form-control rounded-0" placeholder="Enter Room Id Here">
+    <br>
+        </div>
+    <br>
+        <div class="col-12 col-md-4 offset-md-4 mb-3">
+            <input type="text" id='user-name' name='user-name' class="form-control rounded-0" placeholder="Enter Your Email Id Here">
+        </div>
+
+        <div class="col-12 col-md-4 offset-md-4 mb-3">
+    <br>
+        <button id='create-room' class="btn btn-block navbar-dark bg-dark rounded-0 btn-info">create room</button>
+        </div>
+    <div class="col-12 col-md-4 offset-md-4 mb-3 text-center">
+        New here? sign up with <a href="/google" class="btn navbar-dark bg-dark rounded-0 btn-info"><span class="fab fa-google"></span> Google</a>
+
+    </div>
+        <div class="col-12 col-md-4 offset-md-4 mb-3" id='room-created'></div>
+    
+    </div>
+</form>
+</body>
+</html>

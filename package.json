@@ -1,5 +1,5 @@
 {
-  "name": "VideoChatAppUsingNodejs",
+  "name": "my-video-chat-application-using-nodejs",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -10,9 +10,26 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1",
+    "alert": "^5.0.5",
+    "body-parser": "^1.17.1",
+    "cookie-session": "^1.4.0",
+    "datalize": "^0.3.4",
+    "ejs": "^3.1.5",
+    "express": "^4.15.2",
+    "express-session": "^1.17.1",
+    "express-validator": "^6.6.1",
     "googleapis": "^59.0.0",
-    "mongoose": "^5.10.3",
+    "js-alert": "^1.0.4",
+    "koa": "^2.13.0",
+    "koa-router": "^9.4.0",
+    "mongodb": "^2.2.26",
+    "mongoose": "^5.10.4",
+    "node-input-validator": "^4.2.1",
+    "passport": "^0.4.1",
+    "passport-google-oauth2": "^0.2.0",
+    "passport-local": "^1.0.0",
+    "passport-local-mongoose": "^6.0.1",
+    "prompt": "^1.0.0",
     "socket.io": "^2.3.0"
   }
 }

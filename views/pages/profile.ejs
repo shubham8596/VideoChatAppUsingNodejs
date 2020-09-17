@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+<head>
+    <title>Node Authentication</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <style>
+        body        { padding-top:80px; word-wrap:break-word; }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <form action="http://localhost:3000/good" method="POST">
+
+    <div class="page-header text-center">
+        <h1> Are you sure want to signup using this id?</h1>
+        <input type="submit" value="yes" name="yes" class="btn bg-dark rounded-0 btn-info" style="background-color: dimgrey; "/>
+     <a href="/" class="btn bg-dark rounded-0 btn-info" style="background-color: dimgrey; ">no</a>
+    </div>
+
+    <div class="row">
+
+        <!-- GOOGLE INFORMATION -->
+        <div class="col-sm-4"></div>
+        <div class="col-sm-4">
+            <div class="well" style="text-align: center;">
+                <h3 class="text-danger"><span class="fa fa-google-plus"></span> Google</h3>
+
+                    <p>
+                        <strong>email</strong>: <%= email %><br>
+                        <strong>name</strong>: <%= name %><br>
+                        <strong>pic</strong>: <img src="<%=pic%>" width="100" height="100" alt="">
+                    </p>
+
+            </div>
+        </div>
+
+    </div>
+
+</form>
+</div>
+</body>
+</html>
